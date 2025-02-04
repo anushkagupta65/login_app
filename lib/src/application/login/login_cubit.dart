@@ -72,7 +72,7 @@ class LoginCubit extends Cubit<LoginState> {
     }
 
     //Valid credentials
-    if (state.username == "Timbba" && state.password == "Timbba*123") {
+    if (state.username == "Anushka" && state.password == "Anushka*123") {
       Future.delayed(const Duration(seconds: 1), () {
         emit(state.copyWith(
           isSuccess: true,

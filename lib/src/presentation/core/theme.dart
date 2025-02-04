@@ -28,45 +28,16 @@ class AppTheme {
     primaryColor: AppColors.primary,
     iconTheme: const IconThemeData(color: AppColors.lightTextSecondary),
     pageTransitionsTheme: _pageTransitionsTheme,
-    fontFamily: 'Lato',
+    fontFamily: 'Triodion',
     textTheme: const TextTheme(
-      headlineLarge: TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.w500,
-        color: AppColors.lightTextSecondary,
-      ),
-      headlineMedium: TextStyle(
-        fontSize: 16.0,
-        letterSpacing: -0.5,
-        fontWeight: FontWeight.w500,
-        color: AppColors.lightTextSecondary,
-      ),
-      headlineSmall: TextStyle(
-        fontSize: 14.0,
-        fontWeight: FontWeight.w500,
-        color: AppColors.lightTextPrimary,
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 14.0,
-        fontWeight: FontWeight.w400,
-        color: AppColors.lightTextPrimary,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 14.0,
-        fontWeight: FontWeight.normal,
-        color: AppColors.lightTextSecondary,
-      ),
-      bodySmall: TextStyle(
-        fontSize: 12.0,
-        fontWeight: FontWeight.normal,
-        color: AppColors.lightTextPrimary,
-      ),
+      headlineLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+      headlineMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+      headlineSmall: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
+      bodyLarge: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400),
+      bodyMedium: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
+      bodySmall: TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal),
       titleLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-      labelMedium: TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.w500,
-        color: AppColors.lightTextPrimary,
-      ),
+      labelMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
     ),
     popupMenuTheme: PopupMenuThemeData(
       shape: RoundedRectangleBorder(
@@ -79,18 +50,6 @@ class AppTheme {
       error: AppColors.error,
     ),
     dividerColor: AppColors.lightDivider,
-    textButtonTheme: TextButtonThemeData(
-      style: ButtonStyle(
-        textStyle: WidgetStatePropertyAll(
-          const TextStyle(
-            fontFamily: 'Lato',
-            fontWeight: FontWeight.w400,
-            color: AppColors.secondary,
-            fontSize: 14.0,
-          ),
-        ),
-      ),
-    ),
   );
 
   /// Dark style
@@ -111,44 +70,16 @@ class AppTheme {
     primaryColor: AppColors.primary,
     iconTheme: const IconThemeData(color: AppColors.darkTextSecondary),
     pageTransitionsTheme: _pageTransitionsTheme,
-    fontFamily: 'Lato',
+    fontFamily: 'Triodion',
     textTheme: const TextTheme(
-      headlineLarge: TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.w500,
-        color: AppColors.darkTextPrimary,
-      ),
-      headlineMedium: TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.w500,
-        color: AppColors.darkTextSecondary,
-      ),
-      headlineSmall: TextStyle(
-        fontSize: 14.0,
-        fontWeight: FontWeight.w500,
-        color: AppColors.darkTextPrimary,
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 14.0,
-        fontWeight: FontWeight.w400,
-        color: AppColors.darkTextPrimary,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 14.0,
-        fontWeight: FontWeight.normal,
-        color: AppColors.darkTextSecondary,
-      ),
-      bodySmall: TextStyle(
-        fontSize: 12.0,
-        fontWeight: FontWeight.normal,
-        color: AppColors.darkTextPrimary,
-      ),
+      headlineLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+      headlineMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+      headlineSmall: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
+      bodyLarge: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400),
+      bodyMedium: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
+      bodySmall: TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal),
       titleLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-      labelMedium: TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.w500,
-        color: AppColors.darkTextPrimary,
-      ),
+      labelMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
     ),
     popupMenuTheme: PopupMenuThemeData(
       shape: RoundedRectangleBorder(
@@ -161,17 +92,5 @@ class AppTheme {
       error: AppColors.error,
     ),
     dividerColor: AppColors.darkDivider,
-    textButtonTheme: TextButtonThemeData(
-      style: ButtonStyle(
-        textStyle: WidgetStatePropertyAll(
-          const TextStyle(
-            fontFamily: 'Lato',
-            fontWeight: FontWeight.w400,
-            color: AppColors.secondary,
-            fontSize: 14.0,
-          ),
-        ),
-      ),
-    ),
   );
 }

@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:login_app/injection.dart';
 import 'package:login_app/src/application/activity_lifecycle_cubit/activity_lifecycle_cubit.dart';
 import 'package:login_app/src/application/login/login_cubit.dart';
 import 'package:login_app/src/core/theme/theme.dart';
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(lazy: false, create: (_) => ActivityLifecycleCubit()),
         BlocProvider(create: (_) => LoginCubit()),
       ],
-      child: const AppView(),
+      child: AppView(),
     );
   }
 }
@@ -45,13 +43,10 @@ class _AppViewState extends State<AppView> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-
-    if (!kIsWeb) {
-      debugPrint('Current application state = $state');
-      context
-          .read<ActivityLifecycleCubit>()
-          .applicationLifecycleChanged(lifecycleState: state);
-    }
+    debugPrint('current application state = $state');
+    context
+        .read<ActivityLifecycleCubit>()
+        .applicationLifecycleChanged(lifecycleState: state);
   }
 
   @override
@@ -67,13 +62,12 @@ class _AppViewState extends State<AppView> with WidgetsBindingObserver {
   }
 
   void listenSystemTheme() {
-    final platformDispatcher = PlatformDispatcher.instance;
+    final window = WidgetsBinding.instance.window;
 
-    platformDispatcher.onPlatformBrightnessChanged = () {
-      final brightness = platformDispatcher.platformBrightness;
-      debugPrint("System theme: $brightness");
-      debugPrint("Cubit value: ${BlocProvider.of<ThemeCubit>(context).theme}");
-
+    window.onPlatformBrightnessChanged = () {
+      final brightness = window.platformBrightness;
+      debugPrint("System theme : $brightness");
+      debugPrint("Cubit value : ${BlocProvider.of<ThemeCubit>(context).theme}");
       if (BlocProvider.of<ThemeCubit>(context).theme == ThemeState.system) {
         if (brightness == Brightness.dark) {
           setThemeDataDark();
@@ -92,8 +86,6 @@ class _AppViewState extends State<AppView> with WidgetsBindingObserver {
       builder: (context, state) {
         return ScreenUtilInit(
           designSize: const Size(390, 844),
-          minTextAdapt: true,
-          splitScreenMode: true,
           builder: (context, child) {
             return MaterialApp.router(
               routerConfig: appRouter.config(),
@@ -113,19 +105,11 @@ class _AppViewState extends State<AppView> with WidgetsBindingObserver {
               themeMode: context.watch<ThemeCubit>().themeMode,
               debugShowCheckedModeBanner: false,
               builder: (context, child) {
-                return LayoutBuilder(
-                  builder: (context, constraints) {
-                    return OrientationBuilder(
-                      builder: (context, orientation) {
-                        return Scaffold(
-                          body: SafeArea(
-                            child: child ?? LoginScreen(),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                );
+                if (child != null) {
+                  return child;
+                } else {
+                  return LoginScreen();
+                }
               },
             );
           },

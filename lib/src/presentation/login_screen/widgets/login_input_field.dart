@@ -25,70 +25,79 @@ class LoginInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: TextInputType.text,
-      controller: controller,
-      onChanged: onChanged,
-      obscureText: obscureText!,
-      style: TextStyle(
-          color: color(
-        context,
-        AppColors.whiteColor,
-        AppColors.blackColor,
-      ) // Text color
+    return SizedBox(
+      height: 52.h,
+      width: double.infinity,
+      child: TextFormField(
+        controller: controller,
+        onChanged: onChanged,
+        obscureText: obscureText!,
+        style: TextStyle(
+            color: color(
+          context,
+          AppColors.whiteColor,
+          AppColors.blackColor,
+        ) // Text color
+            ),
+        cursorColor: color(
+          context,
+          AppColors.primaryLightTheme,
+          AppColors.primaryDarkTheme,
+        ), // Cursor color
+        decoration: InputDecoration(
+          hintText: inputType,
+          hintStyle: TextStyle(
+            color: color(
+              context,
+              AppColors.whiteColor.withValues(alpha: 0.6),
+              AppColors.blackColor.withValues(alpha: 0.6),
+            ), // Hint color
           ),
-      cursorColor: color(
-        context,
-        AppColors.primaryLightTheme,
-        AppColors.primaryDarkTheme,
-      ), // Cursor color
-      decoration: InputDecoration(
-        hintText: inputType,
-        hintStyle: TextStyle(
-          color: color(
-            context,
-            AppColors.whiteColor.withValues(alpha: 0.6),
-            AppColors.blackColor.withValues(alpha: 0.6),
-          ), // Hint color
-        ),
-        labelText: inputType,
-        labelStyle: TextStyle(
-          color: color(
-            context,
-            AppColors.whiteColor,
-            AppColors.blackColor,
-          ), // Label color
-        ),
-        prefixIcon: Icon(
-          prefixIcon,
-          color: color(
-            context,
-            AppColors.whiteColor,
-            AppColors.blackColor,
-          ), // Icon color
-        ),
-        suffixIcon: suffixIcon,
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          labelText: inputType,
+          labelStyle: TextStyle(
             color: color(
               context,
               AppColors.whiteColor,
               AppColors.blackColor,
-            ), // Border color when enabled
-            width: 0.6.w,
+            ), // Label color
           ),
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          prefixIcon: Icon(
+            prefixIcon,
             color: color(
               context,
               AppColors.whiteColor,
               AppColors.blackColor,
-            ), // Border color when focused
-            width: 1.0.w,
+            ), // Icon color
           ),
-          borderRadius: BorderRadius.circular(8.r),
+          suffixIcon: suffixIcon,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: color(
+                context,
+                AppColors.whiteColor.withValues(alpha: 0.4),
+                AppColors.blackColor,
+              ), // Border color when enabled
+              width: 0.6.w,
+            ),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          filled: true,
+          fillColor: color(
+            context,
+            AppColors.darkBackground.withValues(alpha: 0.4),
+            AppColors.lightBackground.withValues(alpha: 0.4),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: color(
+                context,
+                AppColors.whiteColor.withValues(alpha: 0.4),
+                AppColors.blackColor,
+              ), // Border color when focused
+              width: 1.0.w,
+            ),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
         ),
       ),
     );

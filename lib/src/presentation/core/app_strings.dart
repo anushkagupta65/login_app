@@ -6,4 +6,7 @@ class AppStrings {
   static const String username = "Username";
   static const String password = "Password";
   static const String login = "Login";
+  static const String logout = "Logout";
+  static const String cancel = "Cancel";
+  static const String reallyLogout = "Do you really want to logout?";
 }
