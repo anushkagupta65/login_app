@@ -18,13 +18,15 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginState {
   String get username => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  bool get isPasswordVisible => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  String get errorMessage => throw _privateConstructorUsedError;
   bool get isSuccess => throw _privateConstructorUsedError;
   bool get isFailure => throw _privateConstructorUsedError;
+  String get errorMessage => throw _privateConstructorUsedError;
   String get usernameError => throw _privateConstructorUsedError;
   String get passwordError => throw _privateConstructorUsedError;
-  bool get isPasswordVisible => throw _privateConstructorUsedError;
+  User? get googleUser => throw _privateConstructorUsedError;
+  bool get isUserAuthenticated => throw _privateConstructorUsedError;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -42,13 +44,15 @@ abstract class $LoginStateCopyWith<$Res> {
   $Res call(
       {String username,
       String password,
+      bool isPasswordVisible,
       bool isLoading,
-      String errorMessage,
       bool isSuccess,
       bool isFailure,
+      String errorMessage,
       String usernameError,
       String passwordError,
-      bool isPasswordVisible});
+      User? googleUser,
+      bool isUserAuthenticated});
 }
 
 /// @nodoc
@@ -68,13 +72,15 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   $Res call({
     Object? username = null,
     Object? password = null,
+    Object? isPasswordVisible = null,
     Object? isLoading = null,
-    Object? errorMessage = null,
     Object? isSuccess = null,
     Object? isFailure = null,
+    Object? errorMessage = null,
     Object? usernameError = null,
     Object? passwordError = null,
-    Object? isPasswordVisible = null,
+    Object? googleUser = freezed,
+    Object? isUserAuthenticated = null,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -85,14 +91,14 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      isPasswordVisible: null == isPasswordVisible
+          ? _value.isPasswordVisible
+          : isPasswordVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: null == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
@@ -101,6 +107,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.isFailure
           : isFailure // ignore: cast_nullable_to_non_nullable
               as bool,
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
       usernameError: null == usernameError
           ? _value.usernameError
           : usernameError // ignore: cast_nullable_to_non_nullable
@@ -109,9 +119,13 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.passwordError
           : passwordError // ignore: cast_nullable_to_non_nullable
               as String,
-      isPasswordVisible: null == isPasswordVisible
-          ? _value.isPasswordVisible
-          : isPasswordVisible // ignore: cast_nullable_to_non_nullable
+      googleUser: freezed == googleUser
+          ? _value.googleUser
+          : googleUser // ignore: cast_nullable_to_non_nullable
+              as User?,
+      isUserAuthenticated: null == isUserAuthenticated
+          ? _value.isUserAuthenticated
+          : isUserAuthenticated // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -128,13 +142,15 @@ abstract class _$$LoginStateImplCopyWith<$Res>
   $Res call(
       {String username,
       String password,
+      bool isPasswordVisible,
       bool isLoading,
-      String errorMessage,
       bool isSuccess,
       bool isFailure,
+      String errorMessage,
       String usernameError,
       String passwordError,
-      bool isPasswordVisible});
+      User? googleUser,
+      bool isUserAuthenticated});
 }
 
 /// @nodoc
@@ -152,13 +168,15 @@ class __$$LoginStateImplCopyWithImpl<$Res>
   $Res call({
     Object? username = null,
     Object? password = null,
+    Object? isPasswordVisible = null,
     Object? isLoading = null,
-    Object? errorMessage = null,
     Object? isSuccess = null,
     Object? isFailure = null,
+    Object? errorMessage = null,
     Object? usernameError = null,
     Object? passwordError = null,
-    Object? isPasswordVisible = null,
+    Object? googleUser = freezed,
+    Object? isUserAuthenticated = null,
   }) {
     return _then(_$LoginStateImpl(
       username: null == username
@@ -169,14 +187,14 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      isPasswordVisible: null == isPasswordVisible
+          ? _value.isPasswordVisible
+          : isPasswordVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: null == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
@@ -185,6 +203,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.isFailure
           : isFailure // ignore: cast_nullable_to_non_nullable
               as bool,
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
       usernameError: null == usernameError
           ? _value.usernameError
           : usernameError // ignore: cast_nullable_to_non_nullable
@@ -193,9 +215,13 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.passwordError
           : passwordError // ignore: cast_nullable_to_non_nullable
               as String,
-      isPasswordVisible: null == isPasswordVisible
-          ? _value.isPasswordVisible
-          : isPasswordVisible // ignore: cast_nullable_to_non_nullable
+      googleUser: freezed == googleUser
+          ? _value.googleUser
+          : googleUser // ignore: cast_nullable_to_non_nullable
+              as User?,
+      isUserAuthenticated: null == isUserAuthenticated
+          ? _value.isUserAuthenticated
+          : isUserAuthenticated // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -204,16 +230,18 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoginStateImpl implements _LoginState {
-  _$LoginStateImpl(
+  const _$LoginStateImpl(
       {this.username = "",
       this.password = "",
+      this.isPasswordVisible = false,
       this.isLoading = false,
-      this.errorMessage = "",
       this.isSuccess = false,
       this.isFailure = false,
+      this.errorMessage = "",
       this.usernameError = "",
       this.passwordError = "",
-      this.isPasswordVisible = true});
+      this.googleUser,
+      this.isUserAuthenticated = false});
 
   @override
   @JsonKey()
@@ -223,10 +251,10 @@ class _$LoginStateImpl implements _LoginState {
   final String password;
   @override
   @JsonKey()
-  final bool isLoading;
+  final bool isPasswordVisible;
   @override
   @JsonKey()
-  final String errorMessage;
+  final bool isLoading;
   @override
   @JsonKey()
   final bool isSuccess;
@@ -235,17 +263,22 @@ class _$LoginStateImpl implements _LoginState {
   final bool isFailure;
   @override
   @JsonKey()
+  final String errorMessage;
+  @override
+  @JsonKey()
   final String usernameError;
   @override
   @JsonKey()
   final String passwordError;
   @override
+  final User? googleUser;
+  @override
   @JsonKey()
-  final bool isPasswordVisible;
+  final bool isUserAuthenticated;
 
   @override
   String toString() {
-    return 'LoginState(username: $username, password: $password, isLoading: $isLoading, errorMessage: $errorMessage, isSuccess: $isSuccess, isFailure: $isFailure, usernameError: $usernameError, passwordError: $passwordError, isPasswordVisible: $isPasswordVisible)';
+    return 'LoginState(username: $username, password: $password, isPasswordVisible: $isPasswordVisible, isLoading: $isLoading, isSuccess: $isSuccess, isFailure: $isFailure, errorMessage: $errorMessage, usernameError: $usernameError, passwordError: $passwordError, googleUser: $googleUser, isUserAuthenticated: $isUserAuthenticated)';
   }
 
   @override
@@ -257,20 +290,24 @@ class _$LoginStateImpl implements _LoginState {
                 other.username == username) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.isPasswordVisible, isPasswordVisible) ||
+                other.isPasswordVisible == isPasswordVisible) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.isFailure, isFailure) ||
                 other.isFailure == isFailure) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
             (identical(other.usernameError, usernameError) ||
                 other.usernameError == usernameError) &&
             (identical(other.passwordError, passwordError) ||
                 other.passwordError == passwordError) &&
-            (identical(other.isPasswordVisible, isPasswordVisible) ||
-                other.isPasswordVisible == isPasswordVisible));
+            (identical(other.googleUser, googleUser) ||
+                other.googleUser == googleUser) &&
+            (identical(other.isUserAuthenticated, isUserAuthenticated) ||
+                other.isUserAuthenticated == isUserAuthenticated));
   }
 
   @override
@@ -278,13 +315,15 @@ class _$LoginStateImpl implements _LoginState {
       runtimeType,
       username,
       password,
+      isPasswordVisible,
       isLoading,
-      errorMessage,
       isSuccess,
       isFailure,
+      errorMessage,
       usernameError,
       passwordError,
-      isPasswordVisible);
+      googleUser,
+      isUserAuthenticated);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -296,35 +335,41 @@ class _$LoginStateImpl implements _LoginState {
 }
 
 abstract class _LoginState implements LoginState {
-  factory _LoginState(
+  const factory _LoginState(
       {final String username,
       final String password,
+      final bool isPasswordVisible,
       final bool isLoading,
-      final String errorMessage,
       final bool isSuccess,
       final bool isFailure,
+      final String errorMessage,
       final String usernameError,
       final String passwordError,
-      final bool isPasswordVisible}) = _$LoginStateImpl;
+      final User? googleUser,
+      final bool isUserAuthenticated}) = _$LoginStateImpl;
 
   @override
   String get username;
   @override
   String get password;
   @override
-  bool get isLoading;
+  bool get isPasswordVisible;
   @override
-  String get errorMessage;
+  bool get isLoading;
   @override
   bool get isSuccess;
   @override
   bool get isFailure;
   @override
+  String get errorMessage;
+  @override
   String get usernameError;
   @override
   String get passwordError;
   @override
-  bool get isPasswordVisible;
+  User? get googleUser;
+  @override
+  bool get isUserAuthenticated;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.

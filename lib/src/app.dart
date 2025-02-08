@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:login_app/src/application/activity_lifecycle_cubit/activity_lifecycle_cubit.dart';
 import 'package:login_app/src/application/login/login_cubit.dart';
+import 'package:login_app/src/core/auth_service.dart';
 import 'package:login_app/src/core/theme/theme.dart';
 import 'package:login_app/src/presentation/core/theme.dart';
 import 'package:login_app/src/presentation/login_screen/login_screen.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(lazy: false, create: (_) => ActivityLifecycleCubit()),
-        BlocProvider(create: (_) => LoginCubit()),
+        BlocProvider(create: (_) => LoginCubit(authService: AuthService())),
       ],
       child: AppView(),
     );

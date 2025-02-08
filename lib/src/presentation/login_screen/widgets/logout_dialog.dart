@@ -1,12 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_app/src/core/auth_service.dart';
 import 'package:login_app/src/presentation/core/app_colors.dart';
 import 'package:login_app/src/presentation/core/app_strings.dart';
+import 'package:login_app/src/presentation/core/extentions.dart';
 import 'package:login_app/src/utils/router/app_router.gr.dart';
 
 class LogoutDialog {
   static void show(BuildContext context) {
+    final AuthService authService = AuthService();
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) {
@@ -52,7 +56,22 @@ class LogoutDialog {
         );
       },
     ).then((value) async {
-      if (value == AppStrings.logout && context.mounted) {
+      if (value == AppStrings.logout) {
+        await authService.signOut();
+        print("User signed out.");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: AutoSizeText(
+                textScaleFactor: 1,
+                "User signed out",
+                style: Theme.of(context).textTheme.titleMedium),
+            backgroundColor: color(
+              context,
+              AppColors.lightTextPrimary,
+              AppColors.darkTextPrimary,
+            ),
+          ),
+        );
         context.router.pushAndPopUntil(
           LoginRoute(),
           predicate: (route) => false,

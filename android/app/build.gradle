@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.login_app"
+    namespace "com.example.login_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -43,3 +43,5 @@ android {
 flutter {
     source = "../.."
 }
+
+apply plugin: 'com.google.gms.google-services'

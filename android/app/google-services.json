@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "894143328797",
+    "project_id": "login-system-725fb",
+    "storage_bucket": "login-system-725fb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894143328797:android:a716f16fa7d6b996144cf4",
+        "android_client_info": {
+          "package_name": "com.example.login_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXFCVtNyedVKtjMHnZLoVO9o3CFoemE5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:login_app/src/application/login/login_cubit.dart';
+import 'package:login_app/src/core/auth_service.dart';
 import 'package:login_app/src/presentation/core/app_colors.dart';
 import 'package:login_app/src/presentation/core/app_strings.dart';
 import 'package:login_app/src/presentation/core/extentions.dart';
@@ -14,22 +15,32 @@ import 'package:login_app/src/presentation/login_screen/widgets/signin_tile.dart
 import 'package:login_app/src/utils/router/app_router.gr.dart';
 
 @RoutePage()
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   static const routeName = "/login";
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController usernameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     bool isWeb = MediaQuery.of(context).size.width > 500;
+    final AuthService authService = AuthService();
 
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state.isSuccess) {
-          context.router.pushAndPopUntil(HomeRoute(), predicate: (_) => false);
+        if (state.isSuccess && state.googleUser != null) {
+          context.router.pushAndPopUntil(
+            HomeRoute(user: state.googleUser!, authService: authService),
+            predicate: (route) => false,
+          );
         }
         if (state.isFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -38,9 +49,11 @@ class LoginScreen extends StatelessWidget {
                   textScaleFactor: 1,
                   state.errorMessage,
                   style: Theme.of(context).textTheme.titleMedium),
-              backgroundColor: Colors.black,
-              showCloseIcon: true,
-              closeIconColor: AppColors.whiteColor,
+              backgroundColor: color(
+                context,
+                AppColors.lightTextPrimary,
+                AppColors.darkTextPrimary,
+              ),
               behavior: SnackBarBehavior.floating,
             ),
           );
@@ -175,8 +188,8 @@ class LoginScreen extends StatelessWidget {
                                     loginCubit.passwordChanged(val),
                                 isPassword: true,
                                 prefixIcon: Icons.lock_outline,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
+                                suffixIcon: GestureDetector(
+                                  child: Icon(
                                     state.isPasswordVisible
                                         ? Icons.visibility_off
                                         : Icons.visibility,
@@ -186,8 +199,7 @@ class LoginScreen extends StatelessWidget {
                                       AppColors.blackColor,
                                     ), // Eye icon color
                                   ),
-                                  onPressed: () {
-                                    FocusScope.of(context).unfocus;
+                                  onTap: () {
                                     loginCubit.togglePasswordVisibility();
                                   },
                                 ),
@@ -213,7 +225,35 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ],
                               SizedBox(
-                                height: 16.h,
+                                height: 8.h,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: AutoSizeText.rich(
+                                    TextSpan(
+                                      text: "forgot password?",
+                                      style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        decoration: TextDecoration.underline,
+                                        decorationColor: color(
+                                          context,
+                                          AppColors.whiteColor,
+                                          AppColors.blackColor,
+                                        ),
+                                        decorationThickness: 8,
+                                      ),
+                                    ),
+                                    minFontSize: 14,
+                                    maxFontSize: 14,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8.h,
                               ),
                               SizedBox(
                                 width: double.infinity,
@@ -257,9 +297,61 @@ class LoginScreen extends StatelessWidget {
                               SizedBox(
                                 height: 24.h,
                               ),
-                              SigninTile(
-                                icon: "assets/images/search.png",
-                                title: "Sign in with Google",
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Divider(
+                                        color: color(
+                                          context,
+                                          AppColors.whiteColor,
+                                          AppColors.blackColor,
+                                        ),
+                                        height: 1.2.h,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Text(
+                                      "or",
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: color(
+                                          context,
+                                          AppColors.whiteColor,
+                                          AppColors.blackColor,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Expanded(
+                                      child: Divider(
+                                        color: color(
+                                          context,
+                                          AppColors.whiteColor,
+                                          AppColors.blackColor,
+                                        ),
+                                        height: 1.2.h,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 24.h,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  loginCubit.signInWithGoogle();
+                                },
+                                child: SigninTile(
+                                  icon: "assets/images/search.png",
+                                  title: "Sign in with Google",
+                                ),
                               ),
                               SizedBox(
                                 height: 8.h,
@@ -274,6 +366,19 @@ class LoginScreen extends StatelessWidget {
                               SigninTile(
                                 icon: "assets/images/github.png",
                                 title: "Sign in with GitHub",
+                              ),
+                              SizedBox(
+                                height: 12.h,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                                child: AutoSizeText(
+                                  "Don't have an account yet? Sign up",
+                                  minFontSize: 14,
+                                  maxFontSize: 14,
+                                  maxLines: 1,
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
                               ),
                             ],
                           ),

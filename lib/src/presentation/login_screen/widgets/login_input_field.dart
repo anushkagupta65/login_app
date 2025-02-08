@@ -29,6 +29,7 @@ class LoginInputField extends StatelessWidget {
       height: 52.h,
       width: double.infinity,
       child: TextFormField(
+        enabled: true,
         controller: controller,
         onChanged: onChanged,
         obscureText: obscureText!,
