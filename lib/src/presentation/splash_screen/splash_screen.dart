@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app/src/application/login/login_cubit.dart';
@@ -6,7 +8,6 @@ import 'package:login_app/src/core/auth_service.dart';
 import 'package:login_app/src/utils/router/app_router.gr.dart';
 import 'package:video_player/video_player.dart';
 
-// import 'package:flutter/services.dart';
 @RoutePage()
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,72 +18,94 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late VideoPlayerController? controller;
+  late AnimationController fadeController;
+  late Animation<double> fadeAnimation;
   final AuthService authService = AuthService();
-  late VideoPlayerController controller;
-  bool isInitialized = false;
 
   @override
   void initState() {
     super.initState();
 
-    controller = VideoPlayerController.asset('assets/videos/splash_video.mp4')
-      ..initialize().then((_) {
-        setState(() {
-          isInitialized = true;
-        });
-        controller
-          ..setLooping(false) // No looping
-          ..setVolume(0.0) // Mute video
-          ..play(); // Start playing
+    fadeController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
 
-        // Navigate after 3.5 seconds
-        Future.delayed(
-            const Duration(milliseconds: 3500), navigateToNextScreen);
-      });
+    fadeAnimation = Tween<double>(begin: 0.6, end: 0.0).animate(
+      CurvedAnimation(parent: fadeController, curve: Curves.easeOut),
+    );
+
+    String videoPath = kIsWeb
+        ? 'assets/videos/splash_video_web.mp4'
+        : 'assets/videos/splash_video.mp4';
+
+    controller = VideoPlayerController.asset(videoPath)
+      ..initialize().then(
+        (_) {
+          setState(() {});
+          controller!
+            ..setLooping(false)
+            ..setVolume(0.0)
+            ..play();
+
+          Timer(
+            kIsWeb
+                ? const Duration(milliseconds: 2800)
+                : const Duration(milliseconds: 3600),
+            _navigateToNextScreen,
+          );
+        },
+      );
   }
 
-  void navigateToNextScreen() {
-    final state = context.read<LoginCubit>().state;
-    if (state.isUserAuthenticated) {
-      context.router.pushAndPopUntil(
-        HomeRoute(user: state.googleUser!, authService: authService),
-        predicate: (route) => false,
-      );
-    } else {
-      context.router.pushAndPopUntil(
-        LoginRoute(),
-        predicate: (route) => false,
-      );
-    }
+  void _navigateToNextScreen() {
+    fadeController.forward().then(
+      (_) {
+        final state = context.read<LoginCubit>().state;
+        context.router.replace(
+          state.isUserAuthenticated
+              ? HomeRoute(user: state.googleUser!, authService: authService)
+              : LoginRoute(),
+        );
+      },
+    );
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    controller?.dispose();
+    fadeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          isInitialized
-              ? VideoPlayer(controller)
-              : const Center(child: CircularProgressIndicator()),
-          const Center(
-            child: Text(
-              "WELCOME",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 40,
-                letterSpacing: 1.5,
+      body: FadeTransition(
+        opacity: fadeAnimation,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (controller != null && controller!.value.isInitialized)
+              AspectRatio(
+                aspectRatio: controller!.value.aspectRatio,
+                child: VideoPlayer(controller!),
+              ),
+            const Center(
+              child: Text(
+                "WELCOME",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 40,
+                  letterSpacing: 1.5,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
