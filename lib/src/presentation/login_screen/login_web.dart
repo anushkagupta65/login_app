@@ -1,15 +1,17 @@
-// import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:login_app/src/application/login/login_cubit.dart';
+import 'package:login_app/src/core/auth_service.dart';
 import 'package:login_app/src/presentation/core/app_colors.dart';
 import 'package:login_app/src/presentation/core/app_strings.dart';
 import 'package:login_app/src/presentation/core/extentions.dart';
 import 'package:login_app/src/presentation/login_screen/widgets/login_input_field.dart';
 import 'package:login_app/src/presentation/login_screen/widgets/logo_image_web.dart';
 import 'package:login_app/src/presentation/login_screen/widgets/signin_tile.dart';
+import 'package:login_app/src/utils/router/app_router.gr.dart';
 // import 'package:login_app/src/utils/router/app_router.gr.dart';
 
 class LoginWeb extends StatefulWidget {
@@ -22,13 +24,17 @@ class LoginWeb extends StatefulWidget {
 class _LoginWebState extends State<LoginWeb> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final AuthService authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state.isSuccess) {
-          // context.router.pushAndPopUntil(HomeRoute(), predicate: (_) => false);
+        if (state.isSuccess && state.googleUser != null) {
+          context.router.pushAndPopUntil(
+            HomeRoute(user: state.googleUser!, authService: authService),
+            predicate: (route) => false,
+          );
         }
         if (state.isFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -356,9 +362,14 @@ class _LoginWebState extends State<LoginWeb> {
             SizedBox(
               height: 32.h,
             ),
-            SigninTile(
-              icon: "assets/images/search.png",
-              title: "Sign in with Google",
+            GestureDetector(
+              onTap: () {
+                loginCubit.signInWithGoogle();
+              },
+              child: SigninTile(
+                icon: "assets/images/search.png",
+                title: "Sign in with Google",
+              ),
             ),
             SizedBox(
               height: 16.h,

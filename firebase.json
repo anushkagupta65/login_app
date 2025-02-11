@@ -23,6 +23,7 @@
     }
   },
   "hosting": {
+    "site": "login-system-725fb",
     "public": "build/web",
     "ignore": [
       "firebase.json",

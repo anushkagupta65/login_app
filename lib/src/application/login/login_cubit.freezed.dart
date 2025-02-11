@@ -26,6 +26,7 @@ mixin _$LoginState {
   String get usernameError => throw _privateConstructorUsedError;
   String get passwordError => throw _privateConstructorUsedError;
   User? get googleUser => throw _privateConstructorUsedError;
+  User? get githubUser => throw _privateConstructorUsedError;
   bool get isUserAuthenticated => throw _privateConstructorUsedError;
 
   /// Create a copy of LoginState
@@ -52,6 +53,7 @@ abstract class $LoginStateCopyWith<$Res> {
       String usernameError,
       String passwordError,
       User? googleUser,
+      User? githubUser,
       bool isUserAuthenticated});
 }
 
@@ -80,6 +82,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? usernameError = null,
     Object? passwordError = null,
     Object? googleUser = freezed,
+    Object? githubUser = freezed,
     Object? isUserAuthenticated = null,
   }) {
     return _then(_value.copyWith(
@@ -123,6 +126,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.googleUser
           : googleUser // ignore: cast_nullable_to_non_nullable
               as User?,
+      githubUser: freezed == githubUser
+          ? _value.githubUser
+          : githubUser // ignore: cast_nullable_to_non_nullable
+              as User?,
       isUserAuthenticated: null == isUserAuthenticated
           ? _value.isUserAuthenticated
           : isUserAuthenticated // ignore: cast_nullable_to_non_nullable
@@ -150,6 +157,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       String usernameError,
       String passwordError,
       User? googleUser,
+      User? githubUser,
       bool isUserAuthenticated});
 }
 
@@ -176,6 +184,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
     Object? usernameError = null,
     Object? passwordError = null,
     Object? googleUser = freezed,
+    Object? githubUser = freezed,
     Object? isUserAuthenticated = null,
   }) {
     return _then(_$LoginStateImpl(
@@ -219,6 +228,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.googleUser
           : googleUser // ignore: cast_nullable_to_non_nullable
               as User?,
+      githubUser: freezed == githubUser
+          ? _value.githubUser
+          : githubUser // ignore: cast_nullable_to_non_nullable
+              as User?,
       isUserAuthenticated: null == isUserAuthenticated
           ? _value.isUserAuthenticated
           : isUserAuthenticated // ignore: cast_nullable_to_non_nullable
@@ -241,6 +254,7 @@ class _$LoginStateImpl implements _LoginState {
       this.usernameError = "",
       this.passwordError = "",
       this.googleUser,
+      this.githubUser,
       this.isUserAuthenticated = false});
 
   @override
@@ -273,12 +287,14 @@ class _$LoginStateImpl implements _LoginState {
   @override
   final User? googleUser;
   @override
+  final User? githubUser;
+  @override
   @JsonKey()
   final bool isUserAuthenticated;
 
   @override
   String toString() {
-    return 'LoginState(username: $username, password: $password, isPasswordVisible: $isPasswordVisible, isLoading: $isLoading, isSuccess: $isSuccess, isFailure: $isFailure, errorMessage: $errorMessage, usernameError: $usernameError, passwordError: $passwordError, googleUser: $googleUser, isUserAuthenticated: $isUserAuthenticated)';
+    return 'LoginState(username: $username, password: $password, isPasswordVisible: $isPasswordVisible, isLoading: $isLoading, isSuccess: $isSuccess, isFailure: $isFailure, errorMessage: $errorMessage, usernameError: $usernameError, passwordError: $passwordError, googleUser: $googleUser, githubUser: $githubUser, isUserAuthenticated: $isUserAuthenticated)';
   }
 
   @override
@@ -306,6 +322,8 @@ class _$LoginStateImpl implements _LoginState {
                 other.passwordError == passwordError) &&
             (identical(other.googleUser, googleUser) ||
                 other.googleUser == googleUser) &&
+            (identical(other.githubUser, githubUser) ||
+                other.githubUser == githubUser) &&
             (identical(other.isUserAuthenticated, isUserAuthenticated) ||
                 other.isUserAuthenticated == isUserAuthenticated));
   }
@@ -323,6 +341,7 @@ class _$LoginStateImpl implements _LoginState {
       usernameError,
       passwordError,
       googleUser,
+      githubUser,
       isUserAuthenticated);
 
   /// Create a copy of LoginState
@@ -346,6 +365,7 @@ abstract class _LoginState implements LoginState {
       final String usernameError,
       final String passwordError,
       final User? googleUser,
+      final User? githubUser,
       final bool isUserAuthenticated}) = _$LoginStateImpl;
 
   @override
@@ -368,6 +388,8 @@ abstract class _LoginState implements LoginState {
   String get passwordError;
   @override
   User? get googleUser;
+  @override
+  User? get githubUser;
   @override
   bool get isUserAuthenticated;
 

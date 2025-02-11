@@ -13,6 +13,7 @@ class LoginState with _$LoginState {
     @Default("") String usernameError,
     @Default("") String passwordError,
     User? googleUser,
+    User? githubUser,
     @Default(false) bool isUserAuthenticated,
   }) = _LoginState;
 
@@ -27,6 +28,7 @@ class LoginState with _$LoginState {
         usernameError: "",
         passwordError: "",
         googleUser: null,
+        githubUser: null,
         isUserAuthenticated: false,
       );
 }

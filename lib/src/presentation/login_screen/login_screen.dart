@@ -21,12 +21,11 @@ class LoginScreen extends StatefulWidget {
   static const routeName = "/login";
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginScreen> createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> {
   final TextEditingController usernameController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -36,7 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state.isSuccess && state.googleUser != null) {
+        if (state.isSuccess &&
+            (state.googleUser != null || state.githubUser != null)) {
           context.router.pushAndPopUntil(
             HomeRoute(user: state.googleUser!, authService: authService),
             predicate: (route) => false,
@@ -363,9 +363,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(
                                 height: 8.h,
                               ),
-                              SigninTile(
-                                icon: "assets/images/github.png",
-                                title: "Sign in with GitHub",
+                              GestureDetector(
+                                onTap: () {
+                                  loginCubit.signInWithGitHub();
+                                },
+                                child: SigninTile(
+                                  icon: "assets/images/github.png",
+                                  title: "Sign in with GitHub",
+                                ),
                               ),
                               SizedBox(
                                 height: 12.h,

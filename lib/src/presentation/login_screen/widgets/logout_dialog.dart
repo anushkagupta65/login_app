@@ -58,7 +58,7 @@ class LogoutDialog {
     ).then((value) async {
       if (value == AppStrings.logout) {
         await authService.signOut();
-        print("User signed out.");
+        debugPrint("User signed out.");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: AutoSizeText(

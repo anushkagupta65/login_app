@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:login_app/src/core/auth_service.dart';
@@ -13,33 +14,33 @@ class LoginCubit extends Cubit<LoginState> {
     checkUserAuthentication();
   }
 
-  /// Check authentication status when app starts
   void checkUserAuthentication() {
-    final User? user = FirebaseAuth.instance.currentUser;
-    emit(state.copyWith(
-      isUserAuthenticated: user != null,
-      googleUser: user,
-    ));
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      debugPrint("Auth state changed: $user");
+
+      emit(state.copyWith(
+        isUserAuthenticated: user != null,
+        googleUser: user,
+        githubUser: user,
+        isLoading: false,
+      ));
+    });
   }
 
-  /// Toggles password visibility
   void togglePasswordVisibility() {
     emit(state.copyWith(isPasswordVisible: !state.isPasswordVisible));
   }
 
-  /// Handles username input change
   void usernameChanged(String username) {
     emit(
         state.copyWith(username: username, isSuccess: false, isFailure: false));
   }
 
-  /// Handles password input change
   void passwordChanged(String password) {
     emit(
         state.copyWith(password: password, isSuccess: false, isFailure: false));
   }
 
-  /// Validates user credentials
   bool validateCredentials() {
     String? usernameErrorMessage;
     String? passwordErrorMessage;
@@ -67,7 +68,6 @@ class LoginCubit extends Cubit<LoginState> {
     return usernameErrorMessage == null && passwordErrorMessage == null;
   }
 
-  /// Handles login with username and password
   Future<void> onDoneButtonClick() async {
     emit(state.copyWith(
         isLoading: true, isSuccess: false, isFailure: false, errorMessage: ""));
@@ -96,7 +96,6 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  /// Handles Google Sign-In
   Future<void> signInWithGoogle() async {
     emit(state.copyWith(
       isLoading: true,
@@ -105,7 +104,7 @@ class LoginCubit extends Cubit<LoginState> {
 
     try {
       final User? user = await authService.signInWithGoogle();
-      print("User after sign-in: $user");
+      debugPrint("User after sign-in: $user");
 
       if (user != null) {
         emit(state.copyWith(
@@ -130,11 +129,42 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  /// Handles user logout
+  Future<void> signInWithGitHub() async {
+    emit(state.copyWith(isLoading: true, errorMessage: ""));
+
+    try {
+      final User? user = await authService.signInWithGitHub();
+      debugPrint("User after GitHub sign-in: $user");
+
+      if (user != null) {
+        emit(state.copyWith(
+          isSuccess: true,
+          githubUser: user,
+          isUserAuthenticated: true,
+          isLoading: false,
+        ));
+      } else {
+        emit(state.copyWith(
+          isFailure: true,
+          errorMessage: "GitHub Sign-in failed or user is null",
+          isLoading: false,
+        ));
+      }
+    } catch (e) {
+      debugPrint("GitHub Sign-In Error: $e");
+      emit(state.copyWith(
+        isFailure: true,
+        errorMessage: e.toString(),
+        isLoading: false,
+      ));
+    }
+  }
+
   Future<void> signOut() async {
     await authService.signOut();
     emit(state.copyWith(
       googleUser: null,
+      githubUser: null,
       isUserAuthenticated: false,
     ));
   }

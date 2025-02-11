@@ -34,13 +34,11 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    fadeAnimation = Tween<double>(begin: 0.6, end: 0.0).animate(
+    fadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(parent: fadeController, curve: Curves.easeOut),
     );
 
-    String videoPath = kIsWeb
-        ? 'assets/videos/splash_video_web.mp4'
-        : 'assets/videos/splash_video.mp4';
+    String videoPath = 'assets/videos/splash_video.mp4';
 
     controller = VideoPlayerController.asset(videoPath)
       ..initialize().then(
@@ -54,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
           Timer(
             kIsWeb
                 ? const Duration(milliseconds: 2800)
-                : const Duration(milliseconds: 3600),
+                : const Duration(milliseconds: 4000),
             _navigateToNextScreen,
           );
         },
