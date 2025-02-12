@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart";
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:login_app/src/presentation/core/extentions.dart';
+import 'package:sign_sphere/src/presentation/core/extentions.dart';
 
 enum ThemeState { light, dark, system }
 

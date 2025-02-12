@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:login_app/src/core/auth_service.dart';
-import 'package:login_app/src/presentation/core/app_colors.dart';
-import 'package:login_app/src/presentation/core/extentions.dart';
-import 'package:login_app/src/presentation/login_screen/widgets/logout_dialog.dart';
+import 'package:sign_sphere/src/core/auth_service.dart';
+import 'package:sign_sphere/src/presentation/core/app_colors.dart';
+import 'package:sign_sphere/src/presentation/core/extentions.dart';
+import 'package:sign_sphere/src/presentation/login_screen/widgets/logout_dialog.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {

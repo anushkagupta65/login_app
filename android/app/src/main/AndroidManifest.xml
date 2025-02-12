@@ -10,7 +10,7 @@
     </queries>
     
     <application
-        android:label="login_app"
+        android:label="Sign Sphere"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

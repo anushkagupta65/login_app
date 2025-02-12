@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_app/src/core/auth_service.dart';
-import 'package:login_app/src/presentation/core/app_colors.dart';
-import 'package:login_app/src/presentation/core/app_strings.dart';
-import 'package:login_app/src/presentation/core/extentions.dart';
-import 'package:login_app/src/utils/router/app_router.gr.dart';
+import 'package:sign_sphere/src/core/auth_service.dart';
+import 'package:sign_sphere/src/presentation/core/app_colors.dart';
+import 'package:sign_sphere/src/presentation/core/app_strings.dart';
+import 'package:sign_sphere/src/presentation/core/extentions.dart';
+import 'package:sign_sphere/src/utils/router/app_router.gr.dart';
 
 class LogoutDialog {
   static void show(BuildContext context) {

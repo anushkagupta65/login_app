@@ -3,16 +3,16 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:login_app/src/application/login/login_cubit.dart';
-import 'package:login_app/src/core/auth_service.dart';
-import 'package:login_app/src/presentation/core/app_colors.dart';
-import 'package:login_app/src/presentation/core/app_strings.dart';
-import 'package:login_app/src/presentation/core/extentions.dart';
-import 'package:login_app/src/presentation/login_screen/login_web.dart';
-import 'package:login_app/src/presentation/login_screen/widgets/login_input_field.dart';
-import 'package:login_app/src/presentation/login_screen/widgets/logo_image.dart';
-import 'package:login_app/src/presentation/login_screen/widgets/signin_tile.dart';
-import 'package:login_app/src/utils/router/app_router.gr.dart';
+import 'package:sign_sphere/src/application/login/login_cubit.dart';
+import 'package:sign_sphere/src/core/auth_service.dart';
+import 'package:sign_sphere/src/presentation/core/app_colors.dart';
+import 'package:sign_sphere/src/presentation/core/app_strings.dart';
+import 'package:sign_sphere/src/presentation/core/extentions.dart';
+import 'package:sign_sphere/src/presentation/login_screen/login_web.dart';
+import 'package:sign_sphere/src/presentation/login_screen/widgets/login_input_field.dart';
+import 'package:sign_sphere/src/presentation/login_screen/widgets/logo_image.dart';
+import 'package:sign_sphere/src/presentation/login_screen/widgets/signin_tile.dart';
+import 'package:sign_sphere/src/utils/router/app_router.gr.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {

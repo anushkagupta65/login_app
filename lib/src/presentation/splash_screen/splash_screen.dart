@@ -3,9 +3,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_app/src/application/login/login_cubit.dart';
-import 'package:login_app/src/core/auth_service.dart';
-import 'package:login_app/src/utils/router/app_router.gr.dart';
+import 'package:sign_sphere/src/application/login/login_cubit.dart';
+import 'package:sign_sphere/src/core/auth_service.dart';
+import 'package:sign_sphere/src/utils/router/app_router.gr.dart';
 import 'package:video_player/video_player.dart';
 
 @RoutePage()

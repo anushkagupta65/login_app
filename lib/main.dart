@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:login_app/firebase_options.dart';
-import 'package:login_app/injection.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:sign_sphere/firebase_options.dart';
+import 'package:sign_sphere/injection.dart';
 import 'src/app.dart';
 
 void main() async {
@@ -39,10 +39,9 @@ void main() async {
   runApp(MyApp());
 }
 
+// import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:login_app/src/core/auth_service.dart';
 
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -51,89 +50,105 @@ void main() async {
 // }
 
 // class MyApp extends StatelessWidget {
-//   final AuthService _authService = AuthService();
-
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
 //       debugShowCheckedModeBanner: false,
-//       home: StreamBuilder<User?>(
-//         stream: _authService.authStateChanges,
-//         builder: (context, snapshot) {
-//           if (snapshot.connectionState == ConnectionState.active) {
-//             final user = snapshot.data;
-//             if (user == null) {
-//               return SignInScreen(authService: _authService);
-//             } else {
-//               return HomeScreen(user: user, authService: _authService);
-//             }
+//       home: AuthStateScreen(),
+//     );
+//   }
+// }
+
+// class AuthStateScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder<User?>(
+//       stream: FirebaseAuth.instance.authStateChanges(),
+//       builder: (context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.active) {
+//           if (snapshot.hasData) {
+//             return HomePage();
+//           } else {
+//             return SignInScreen();
 //           }
-//           return Center(child: CircularProgressIndicator());
-//         },
-//       ),
+//         }
+//         return Scaffold(body: Center(child: CircularProgressIndicator()));
+//       },
 //     );
 //   }
 // }
 
-// class SignInScreen extends StatelessWidget {
-//   final AuthService authService;
-
-//   SignInScreen({required this.authService});
-
+// class SignInScreen extends StatefulWidget {
 //   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Sign In with Google')),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () async {
-//             final user = await authService.signInWithGoogle();
-//             if (user != null) {
-//               print("User signed in: ${user.displayName}");
-//             } else {
-//               print("Sign-in failed!");
-//             }
-//           },
-//           child: Text('Sign in with Google'),
-//         ),
-//       ),
-//     );
-//   }
+//   _SignInScreenState createState() => _SignInScreenState();
 // }
 
-// class HomeScreen extends StatelessWidget {
-//   final User user;
-//   final AuthService authService;
+// class _SignInScreenState extends State<SignInScreen> {
+//   final TextEditingController emailController = TextEditingController();
+//   final TextEditingController passwordController = TextEditingController();
+//   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-//   HomeScreen({required this.user, required this.authService});
+//   void signIn() async {
+//     try {
+//       await _auth.signInWithEmailAndPassword(
+//         email: emailController.text.trim(),
+//         password: passwordController.text.trim(),
+//       );
+//     } catch (e) {
+//       ScaffoldMessenger.of(context)
+//           .showSnackBar(SnackBar(content: Text("Error: $e")));
+//     }
+//   }
+
+//   void signUp() async {
+//     try {
+//       await _auth.createUserWithEmailAndPassword(
+//         email: emailController.text.trim(),
+//         password: passwordController.text.trim(),
+//       );
+//     } catch (e) {
+//       ScaffoldMessenger.of(context)
+//           .showSnackBar(SnackBar(content: Text("Error: $e")));
+//     }
+//   }
 
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//       appBar: AppBar(title: Text('Welcome, ${user.displayName}')),
-//       body: Center(
+//       appBar: AppBar(title: Text("Sign In")),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
 //         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
 //           children: [
-//             CircleAvatar(
-//               backgroundImage: NetworkImage(user.photoURL ?? ''),
-//               radius: 50,
-//             ),
-//             SizedBox(height: 20),
-//             Text('Welcome, ${user.displayName}'),
+//             TextField(
+//                 controller: emailController,
+//                 decoration: InputDecoration(labelText: "Email")),
+//             TextField(
+//                 controller: passwordController,
+//                 decoration: InputDecoration(labelText: "Password"),
+//                 obscureText: true),
 //             SizedBox(height: 10),
-//             Text('Email: ${user.email}'),
-//             SizedBox(height: 20),
-//             ElevatedButton(
-//               onPressed: () async {
-//                 await authService.signOut();
-//                 print("User signed out.");
-//               },
-//               child: Text('Sign out'),
-//             ),
+//             ElevatedButton(onPressed: signIn, child: Text("Sign In")),
+//             ElevatedButton(onPressed: signUp, child: Text("Sign Up")),
 //           ],
 //         ),
 //       ),
+//     );
+//   }
+// }
+
+// class HomePage extends StatelessWidget {
+//   void signOut() async {
+//     await FirebaseAuth.instance.signOut();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//           title: Text("Home"),
+//           actions: [IconButton(onPressed: signOut, icon: Icon(Icons.logout))]),
+//       body: Center(child: Text("Welcome! You are signed in.")),
 //     );
 //   }
 // }

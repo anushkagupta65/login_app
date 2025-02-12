@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:login_app/src/application/activity_lifecycle_cubit/activity_lifecycle_cubit.dart';
-import 'package:login_app/src/application/login/login_cubit.dart';
-import 'package:login_app/src/core/auth_service.dart';
-import 'package:login_app/src/core/theme/theme.dart';
-import 'package:login_app/src/presentation/core/theme.dart';
-import 'package:login_app/src/presentation/login_screen/login_screen.dart';
-import 'package:login_app/src/utils/router/app_router.dart';
+import 'package:sign_sphere/src/application/activity_lifecycle_cubit/activity_lifecycle_cubit.dart';
+import 'package:sign_sphere/src/application/login/login_cubit.dart';
+import 'package:sign_sphere/src/core/auth_service.dart';
+import 'package:sign_sphere/src/core/theme/theme.dart';
+import 'package:sign_sphere/src/presentation/core/theme.dart';
+import 'package:sign_sphere/src/presentation/login_screen/login_screen.dart';
+import 'package:sign_sphere/src/utils/router/app_router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

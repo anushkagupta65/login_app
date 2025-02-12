@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -46,47 +45,21 @@ class AuthService {
     try {
       debugPrint("Starting GitHub Sign-In...");
 
+      // Use Firebase's GitHub authentication with a popup
       GithubAuthProvider githubProvider = GithubAuthProvider();
+
       UserCredential userCredential;
 
-      try {
-        // Try signing in with GitHub
-        if (kIsWeb) {
-          userCredential = await _auth.signInWithPopup(githubProvider);
-        } else {
-          userCredential = await _auth.signInWithProvider(githubProvider);
-        }
-        return userCredential.user;
-      } on FirebaseAuthException catch (e) {
-        if (e.code == "account-exists-with-different-credential") {
-          debugPrint(
-              "Account exists with a different credential. Linking accounts...");
-
-          // Get the list of providers already linked to this email
-          String email = e.email!;
-          List<String> signInMethods =
-              await _auth.fetchSignInMethodsForEmail(email);
-
-          if (signInMethods.contains("gmail.com")) {
-            // User has signed in with Google before
-            GoogleAuthProvider googleProvider = GoogleAuthProvider();
-            UserCredential googleCredential =
-                await _auth.signInWithProvider(googleProvider);
-
-            // Link GitHub credentials to the existing Google account
-            await googleCredential.user?.linkWithCredential(e.credential!);
-            debugPrint("GitHub linked to Google account successfully!");
-            return googleCredential.user;
-          } else {
-            debugPrint(
-                "User has an existing account with an unknown provider.");
-            return null;
-          }
-        } else {
-          debugPrint("GitHub Sign-In Error: ${e.message}");
-          return null;
-        }
+      if (kIsWeb) {
+        // For web, use signInWithPopup
+        userCredential = await _auth.signInWithPopup(githubProvider);
+      } else {
+        // For mobile, use signInWithProvider (no redirect needed)
+        userCredential = await _auth.signInWithProvider(githubProvider);
       }
+
+      debugPrint("GitHub sign-in success! Returning user...");
+      return userCredential.user;
     } catch (e) {
       debugPrint("GitHub Sign-In Error: $e");
       return null;

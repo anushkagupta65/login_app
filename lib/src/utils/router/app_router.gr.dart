@@ -12,11 +12,11 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:firebase_auth/firebase_auth.dart' as _i6;
 import 'package:flutter/material.dart' as _i5;
-import 'package:login_app/src/core/auth_service.dart' as _i7;
-import 'package:login_app/src/presentation/home_screen.dart' as _i1;
-import 'package:login_app/src/presentation/login_screen/login_screen.dart'
+import 'package:sign_sphere/src/core/auth_service.dart' as _i7;
+import 'package:sign_sphere/src/presentation/home_screen.dart' as _i1;
+import 'package:sign_sphere/src/presentation/login_screen/login_screen.dart'
     as _i2;
-import 'package:login_app/src/presentation/splash_screen/splash_screen.dart'
+import 'package:sign_sphere/src/presentation/splash_screen/splash_screen.dart'
     as _i3;
 
 /// generated route for

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:login_app/src/presentation/core/app_colors.dart';
-import 'package:login_app/src/presentation/core/extentions.dart';
+import 'package:sign_sphere/src/presentation/core/app_colors.dart';
+import 'package:sign_sphere/src/presentation/core/extentions.dart';
 
 class LoginInputField extends StatelessWidget {
   final String inputType;

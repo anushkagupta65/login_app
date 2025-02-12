@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:login_app/src/presentation/core/app_colors.dart';
-import 'package:login_app/src/presentation/core/extentions.dart';
+import 'package:sign_sphere/src/presentation/core/app_colors.dart';
+
+import '../../core/extentions.dart';
 
 class SigninTile extends StatelessWidget {
   final String icon;

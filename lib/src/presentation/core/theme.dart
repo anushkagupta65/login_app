@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:login_app/src/presentation/core/app_colors.dart';
+import 'package:sign_sphere/src/presentation/core/app_colors.dart';
 
 class AppTheme {
   static const _pageTransitionsTheme = PageTransitionsTheme(
