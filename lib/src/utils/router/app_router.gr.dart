@@ -12,8 +12,9 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:firebase_auth/firebase_auth.dart' as _i6;
 import 'package:flutter/material.dart' as _i5;
-import 'package:sign_sphere/src/core/auth_service.dart' as _i7;
-import 'package:sign_sphere/src/presentation/home_screen.dart' as _i1;
+import 'package:sign_sphere/src/core/service/auth_service.dart' as _i7;
+import 'package:sign_sphere/src/presentation/home_screen/home_screen.dart'
+    as _i1;
 import 'package:sign_sphere/src/presentation/login_screen/login_screen.dart'
     as _i2;
 import 'package:sign_sphere/src/presentation/splash_screen/splash_screen.dart'
@@ -28,10 +29,10 @@ class HomeRoute extends _i4.PageRouteInfo<HomeRouteArgs> {
     required _i7.AuthService authService,
     List<_i4.PageRouteInfo>? children,
   }) : super(
-         HomeRoute.name,
-         args: HomeRouteArgs(key: key, user: user, authService: authService),
-         initialChildren: children,
-       );
+          HomeRoute.name,
+          args: HomeRouteArgs(key: key, user: user, authService: authService),
+          initialChildren: children,
+        );
 
   static const String name = 'HomeRoute';
 
@@ -71,7 +72,7 @@ class HomeRouteArgs {
 /// [_i2.LoginScreen]
 class LoginRoute extends _i4.PageRouteInfo<void> {
   const LoginRoute({List<_i4.PageRouteInfo>? children})
-    : super(LoginRoute.name, initialChildren: children);
+      : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
@@ -87,7 +88,7 @@ class LoginRoute extends _i4.PageRouteInfo<void> {
 /// [_i3.SplashScreen]
 class SplashRoute extends _i4.PageRouteInfo<void> {
   const SplashRoute({List<_i4.PageRouteInfo>? children})
-    : super(SplashRoute.name, initialChildren: children);
+      : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 

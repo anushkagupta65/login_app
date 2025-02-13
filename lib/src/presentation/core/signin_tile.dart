@@ -1,9 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sign_sphere/src/presentation/core/app_colors.dart';
 
-import '../../core/extentions.dart';
+import 'extentions.dart';
 
 class SigninTile extends StatelessWidget {
   final String icon;
@@ -47,7 +48,27 @@ class SigninTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (icon == "assets/images/github.png")
+              if (!kIsWeb)
+                if (icon == "assets/images/github.png")
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 11.r,
+                        backgroundColor: AppColors.whiteColor,
+                      ),
+                      Image.asset(
+                        icon,
+                        height: 22.h,
+                      ),
+                    ],
+                  )
+                else
+                  Image.asset(
+                    icon,
+                    height: 22.h,
+                  )
+              else if (icon == "assets/images/github.png")
                 Stack(
                   alignment: Alignment.center,
                   children: [
@@ -67,7 +88,7 @@ class SigninTile extends StatelessWidget {
                   height: 24.h,
                 ),
               SizedBox(
-                width: 8.w,
+                width: 5.w,
               ),
               AutoSizeText(
                 textAlign: TextAlign.center,

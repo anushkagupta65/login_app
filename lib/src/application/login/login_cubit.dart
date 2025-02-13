@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sign_sphere/src/core/auth_service.dart';
+import 'package:sign_sphere/src/core/service/auth_service.dart';
 
 part 'login_state.dart';
 part 'login_cubit.freezed.dart';

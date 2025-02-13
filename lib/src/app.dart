@@ -5,7 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sign_sphere/src/application/activity_lifecycle_cubit/activity_lifecycle_cubit.dart';
 import 'package:sign_sphere/src/application/login/login_cubit.dart';
-import 'package:sign_sphere/src/core/auth_service.dart';
+import 'package:sign_sphere/src/core/service/auth_service.dart';
 import 'package:sign_sphere/src/core/theme/theme.dart';
 import 'package:sign_sphere/src/presentation/core/theme.dart';
 import 'package:sign_sphere/src/presentation/login_screen/login_screen.dart';

@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:sign_sphere/src/presentation/home_screen.dart';
+import 'package:sign_sphere/src/presentation/home_screen/home_screen.dart';
 import 'package:sign_sphere/src/presentation/login_screen/login_screen.dart';
 import 'package:sign_sphere/src/presentation/splash_screen/splash_screen.dart';
 import 'package:sign_sphere/src/utils/router/app_router.gr.dart';

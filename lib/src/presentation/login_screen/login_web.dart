@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sign_sphere/src/application/login/login_cubit.dart';
-import 'package:sign_sphere/src/core/auth_service.dart';
+import 'package:sign_sphere/src/core/service/auth_service.dart';
 import 'package:sign_sphere/src/presentation/core/app_colors.dart';
 import 'package:sign_sphere/src/presentation/core/app_strings.dart';
 import 'package:sign_sphere/src/presentation/core/extentions.dart';
-import 'package:sign_sphere/src/presentation/login_screen/widgets/login_input_field.dart';
-import 'package:sign_sphere/src/presentation/login_screen/widgets/logo_image_web.dart';
-import 'package:sign_sphere/src/presentation/login_screen/widgets/signin_tile.dart';
+import 'package:sign_sphere/src/presentation/core/login_input_field.dart';
+import 'package:sign_sphere/src/presentation/core/logo_image_web.dart';
+import 'package:sign_sphere/src/presentation/core/signin_tile.dart';
 import 'package:sign_sphere/src/utils/router/app_router.gr.dart';
 
 class LoginWeb extends StatefulWidget {
@@ -29,7 +29,8 @@ class _LoginWebState extends State<LoginWeb> {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state.isSuccess && state.googleUser != null) {
+        if (state.isSuccess &&
+            (state.googleUser != null || state.githubUser != null)) {
           context.router.pushAndPopUntil(
             HomeRoute(user: state.googleUser!, authService: authService),
             predicate: (route) => false,
@@ -47,9 +48,6 @@ class _LoginWebState extends State<LoginWeb> {
                 AppColors.lightTextPrimary,
                 AppColors.darkTextPrimary,
               ),
-              // showCloseIcon: true,
-              // closeIconColor: AppColors.whiteColor,
-              // behavior: SnackBarBehavior.floating,
             ),
           );
         }
@@ -255,7 +253,7 @@ class _LoginWebState extends State<LoginWeb> {
                 width: double.infinity,
                 child: AutoSizeText.rich(
                   TextSpan(
-                    text: "forgot password?",
+                    text: AppStrings.forgetPassword,
                     style: TextStyle(
                       fontStyle: FontStyle.italic,
                       decoration: TextDecoration.underline,
@@ -283,7 +281,7 @@ class _LoginWebState extends State<LoginWeb> {
               child: ElevatedButton(
                 onPressed: () {
                   FocusScope.of(context).unfocus;
-                  loginCubit.onDoneButtonClick(); // Trigger the login action
+                  loginCubit.onDoneButtonClick();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
@@ -361,28 +359,33 @@ class _LoginWebState extends State<LoginWeb> {
             SizedBox(
               height: 32.h,
             ),
+            SigninTile(
+              icon: "assets/images/phone_number.png",
+              title: AppStrings.phone,
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
             GestureDetector(
               onTap: () {
                 loginCubit.signInWithGoogle();
               },
               child: SigninTile(
                 icon: "assets/images/search.png",
-                title: "Sign in with Google",
+                title: AppStrings.google,
               ),
             ),
             SizedBox(
               height: 16.h,
             ),
-            SigninTile(
-              icon: "assets/images/linkedin.png",
-              title: "Sign in with LinkedIn",
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            SigninTile(
-              icon: "assets/images/github.png",
-              title: "Sign in with GitHub",
+            GestureDetector(
+              onTap: () {
+                loginCubit.signInWithGitHub();
+              },
+              child: SigninTile(
+                icon: "assets/images/github.png",
+                title: AppStrings.github,
+              ),
             ),
             SizedBox(
               height: 16.h,
@@ -390,7 +393,7 @@ class _LoginWebState extends State<LoginWeb> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 1.w),
               child: AutoSizeText(
-                "Don't have an account yet? Sign up",
+                AppStrings.signUp,
                 minFontSize: 14,
                 maxFontSize: 16,
                 style: TextStyle(fontStyle: FontStyle.italic),
