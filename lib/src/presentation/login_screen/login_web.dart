@@ -8,7 +8,7 @@ import 'package:sign_sphere/src/core/service/auth_service.dart';
 import 'package:sign_sphere/src/presentation/core/app_colors.dart';
 import 'package:sign_sphere/src/presentation/core/app_strings.dart';
 import 'package:sign_sphere/src/presentation/core/extentions.dart';
-import 'package:sign_sphere/src/presentation/core/login_input_field.dart';
+import 'package:sign_sphere/src/presentation/core/input_field.dart';
 import 'package:sign_sphere/src/presentation/core/logo_image_web.dart';
 import 'package:sign_sphere/src/presentation/core/signin_tile.dart';
 import 'package:sign_sphere/src/utils/router/app_router.gr.dart';
@@ -177,7 +177,7 @@ class _LoginWebState extends State<LoginWeb> {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 24.h),
-            LoginInputField(
+            InputField(
               inputType: AppStrings.username,
               controller: usernameController,
               onChanged: (val) => loginCubit.usernameChanged(val),
@@ -204,7 +204,7 @@ class _LoginWebState extends State<LoginWeb> {
             SizedBox(
               height: 16.h,
             ),
-            LoginInputField(
+            InputField(
               inputType: AppStrings.password,
               controller: passwordController,
               onChanged: (val) => loginCubit.passwordChanged(val),

@@ -11,20 +11,19 @@ import 'package:sign_sphere/src/presentation/core/extentions.dart';
 import 'package:sign_sphere/src/presentation/login_screen/login_web.dart';
 import 'package:sign_sphere/src/presentation/core/input_field.dart';
 import 'package:sign_sphere/src/presentation/core/logo_image.dart';
-import 'package:sign_sphere/src/presentation/core/signin_tile.dart';
 import 'package:sign_sphere/src/utils/router/app_router.gr.dart';
 
 @RoutePage()
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
-  static const routeName = "/login";
+  static const routeName = "/signup";
 
   @override
-  State<LoginScreen> createState() => LoginScreenState();
+  State<SignUpScreen> createState() => SignUpScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
+class SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -117,26 +116,30 @@ class LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               AutoSizeText(
-                                AppStrings.welcomeBack,
-                                textScaleFactor: 0.8,
+                                AppStrings.welcome,
+                                textScaleFactor: 1,
+                                minFontSize: 28,
+                                maxFontSize: 32,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge!
                                     .copyWith(
-                                        fontSize: 32,
                                         color: color(
-                                          context,
-                                          AppColors.whiteColor,
-                                          AppColors.blackColor,
-                                        )),
+                                      context,
+                                      AppColors.whiteColor,
+                                      AppColors.blackColor,
+                                    )),
                                 textAlign: TextAlign.center,
                               ),
                               SizedBox(
                                 height: 16.h,
                               ),
                               AutoSizeText(
-                                AppStrings.enterCredentials,
-                                maxFontSize: 14,
+                                AppStrings.getStarted,
+                                textScaleFactor: 1,
+                                minFontSize: 16,
+                                maxFontSize: 20,
+                                maxLines: 2,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -299,90 +302,18 @@ class LoginScreenState extends State<LoginScreen> {
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 8.w),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Divider(
-                                        color: color(
-                                          context,
-                                          AppColors.whiteColor,
-                                          AppColors.blackColor,
-                                        ),
-                                        height: 1.2.h,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Text(
-                                      "or",
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: color(
-                                          context,
-                                          AppColors.whiteColor,
-                                          AppColors.blackColor,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Expanded(
-                                      child: Divider(
-                                        color: color(
-                                          context,
-                                          AppColors.whiteColor,
-                                          AppColors.blackColor,
-                                        ),
-                                        height: 1.2.h,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 24.h,
-                              ),
-                              SigninTile(
-                                icon: "assets/images/phone_number.png",
-                                title: AppStrings.phone,
-                              ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  loginCubit.signInWithGoogle();
-                                },
-                                child: SigninTile(
-                                  icon: "assets/images/search.png",
-                                  title: AppStrings.google,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  loginCubit.signInWithGitHub();
-                                },
-                                child: SigninTile(
-                                  icon: "assets/images/github.png",
-                                  title: AppStrings.github,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.w),
-                                child: AutoSizeText(
-                                  AppStrings.signUp,
-                                  minFontSize: 14,
-                                  maxFontSize: 14,
-                                  maxLines: 1,
-                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    context.router.replace(LoginRoute());
+                                  },
+                                  child: AutoSizeText(
+                                    AppStrings.accountLogin,
+                                    minFontSize: 14,
+                                    maxFontSize: 14,
+                                    maxLines: 1,
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
+                                  ),
                                 ),
                               ),
                             ],

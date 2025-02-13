@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sign_sphere/src/presentation/core/app_colors.dart';
 import 'package:sign_sphere/src/presentation/core/extentions.dart';
 
-class LoginInputField extends StatelessWidget {
+class InputField extends StatelessWidget {
   final String inputType;
   final TextEditingController controller;
   final bool isPassword;
@@ -12,7 +12,7 @@ class LoginInputField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool? obscureText;
 
-  const LoginInputField({
+  const InputField({
     super.key,
     required this.inputType,
     required this.controller,

@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen>
 
           Timer(
             kIsWeb
-                ? const Duration(milliseconds: 2800)
+                ? const Duration(milliseconds: 4000)
                 : const Duration(milliseconds: 4000),
             _navigateToNextScreen,
           );
@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen>
         context.router.replace(
           state.isUserAuthenticated
               ? HomeRoute(user: state.googleUser!, authService: authService)
-              : LoginRoute(),
+              : SignUpRoute(),
         );
       },
     );
