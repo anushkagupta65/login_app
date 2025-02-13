@@ -377,12 +377,18 @@ class LoginScreenState extends State<LoginScreen> {
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 8.w),
-                                child: AutoSizeText(
-                                  AppStrings.signUp,
-                                  minFontSize: 14,
-                                  maxFontSize: 14,
-                                  maxLines: 1,
-                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    context.router.replace(SignUpRoute());
+                                  },
+                                  child: AutoSizeText(
+                                    AppStrings.signUp,
+                                    minFontSize: 14,
+                                    maxFontSize: 14,
+                                    maxLines: 1,
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
+                                  ),
                                 ),
                               ),
                             ],
